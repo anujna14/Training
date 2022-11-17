@@ -183,13 +183,16 @@ function anyStorage(nest, source, name) {
 
 async function locateScalpel(nest: any) {
   let currentNest = nest.name;
-  while (true) {
-    let nextNest = await anyStorage(nest, currentNest, "scalpel");
-    if (nextNest == currentNest) {
-      return currentNest;
-    }
+  try {
+    while (true) {
+      let nextNest = await anyStorage(nest, currentNest, "scalpel");
+      if (nextNest == currentNest) {
+        return currentNest;
+      }
       currentNest = nextNest;
-    
+    }
+  } catch (error) {
+    return error;
   }
 }
 

@@ -173,21 +173,19 @@ function anyStorage(nest, source, name) {
   else return routeRequest(nest, source, "storage", name);
 }
 
-
 async function locateScalpel(nest) {
   let currentNest = nest.name;
-//   try {
+  try {
     while (true) {
       let nextNest = await anyStorage(nest, currentNest, "scalpel");
       if (nextNest == currentNest) {
         return currentNest;
       }
       currentNest = nextNest;
-    // }
-  } 
-//   catch (error) {
-//     return error;
-//   }
+    }
+  } catch (error) {
+    return error;
+  }
 }
 
 function locateScalpel2(nest) {
